@@ -9,9 +9,9 @@ include_directories(${Boost_INCLUDE_DIRS})
 add_subdirectory(inputData)
 add_subdirectory(output)
 
-add_executable(MAIN mainCahd.cpp TransactionsTable.h TransactionsTable.cpp TransactionWrapper.h Cahd.h Cahd.cpp
+add_executable(Cahd mainCahd.cpp TransactionsTable.h TransactionsTable.cpp TransactionWrapper.h Cahd.h Cahd.cpp
         Histogram.cpp Histogram.h TransactionGroup.h TransactionGroup.cpp TransactionDataAnonymizationTypes.h )
-target_link_libraries( MAIN ${CMAKE_THREAD_LIBS_INIT} ${PYTHON_LIBRARIES}  ${Boost_LIBRARIES})
+target_link_libraries( Cahd ${CMAKE_THREAD_LIBS_INIT} ${PYTHON_LIBRARIES}  ${Boost_LIBRARIES})
 
 add_executable(KLDIVERGENCE klDivergence.cpp TransactionsTable.h TransactionsTable.cpp TransactionWrapper.h Cahd.h Cahd.cpp
         Histogram.cpp Histogram.h TransactionGroup.h TransactionGroup.cpp TransactionDataAnonymizationTypes.h )
