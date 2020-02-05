@@ -1,7 +1,5 @@
-# TransactionDataAnonymization
+# Correlation-Aware Anonymization of High-Dimensional Data 
 
 
 
 
-
-Data from https://www.kaggle.com/jihyeseo/online-retail-data-set-from-uci-ml-repo/data
