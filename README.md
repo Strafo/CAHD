@@ -23,12 +23,11 @@ $./Cahd --help
 **Example**
 
 With the binary located in the parent folder of the CAD project:
-
+```
 .
-
 ├── Cahd (bianary file)
-
-L__ BMS1formatted100.csv
+├── BMS1formatted100.csv
+```
 
 The command:
 
