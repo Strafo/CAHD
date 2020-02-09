@@ -35,4 +35,4 @@ The command:
 $ ./Cahd -i BMS1formatted1000.csv -p 4 -a 3 -s 10877-18423  -v -d
 
 ```
-will print to the console some debug
+will print debug information and sparse matrix charts on the console.
