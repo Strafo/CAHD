@@ -87,7 +87,7 @@ void TransactionTable::create_fake_entries(){
     position_t offset = products_position_map.size();
     assert(invoice_position_map.size()>=products_position_map.size());
     unsigned long pad_dim = invoice_position_map.size() - products_position_map.size();
-    for(long i = 0 ; i < pad_dim ; ++i){
+    for(unsigned long i = 0 ; i < pad_dim ; ++i){
         stock_code_fake="FAKE_"+to_string(offset + i);
         assert((products_position_map.insert(pair<string,position_t>( stock_code_fake, offset + i))).second);
     }
@@ -106,10 +106,8 @@ void TransactionTable::init_sensitive_item_set(const list<product_t> &sensitive_
 void TransactionTable::permuteMatrix(const std::vector<position_t> &permutation) {
     RowMatrix p_m,p_m_transpose;
     auto *band_matrix = new RowMatrix (matrix->rows(),matrix->cols());
-    //cout<<"Creating  permutation matrix..."<<endl; todo
     p_m=create_permutation_matrix(matrix->rows(),permutation);
     p_m_transpose= p_m.transpose();
-    //cout<<"Calculating new permuted transaction matrix..."<<endl;//todo if (cols!=rows)
     *band_matrix =p_m*(*matrix)*p_m_transpose;
     delete matrix;
     matrix=band_matrix;
@@ -117,20 +115,21 @@ void TransactionTable::permuteMatrix(const std::vector<position_t> &permutation)
 
 void TransactionTable::permuteMaps(const vector<position_t> &permutation){
     std::map<invoice_t , position_t >::iterator it;
+    std::map<product_t , position_t >::iterator it2;
     position_t curr=0;
     map<string,position_t> temp_prod(products_position_map);
     map<string,position_t> temp_invo(invoice_position_map);
     string invo_key,prod_key;
-
-    for (position_t i : permutation) {
+    assert(products_position_map.size()==invoice_position_map.size());
+    for (const position_t &i : permutation) {
         invo_key=find_key_in_map(temp_invo,i);
         prod_key=find_key_in_map(temp_prod,i);
         it = invoice_position_map.find(invo_key);
         assert(it != invoice_position_map.end());
         it->second = curr;
-        it = products_position_map.find(prod_key);
-        assert(it != products_position_map.end());
-        it->second = curr;
+        it2 = products_position_map.find(prod_key);
+        assert(it2 != products_position_map.end());
+        it2->second = curr;
         curr++;
     }
 }
@@ -175,8 +174,9 @@ TransactionTable TransactionTable::createSymmetricMatrix() const {
 }
 
 void TransactionTable::permuteTransactionMatrix(const std::vector<position_t> &permutation) {
-    this->permuteMatrix(permutation);
-    this->permuteMaps(permutation);
+    //assert(products_position_map.size()==330);
+    permuteMatrix(permutation);
+    permuteMaps(permutation);
 }
 
 /*
@@ -389,8 +389,9 @@ void reset_file(istream&in){
 
 invoice_t find_key_in_map(const map<invoice_t ,position_t> &m,const position_t &val){
     for(const auto & it : m){
-        if (it.second == val)
+        if (it.second == val) {
             return it.first;
+        }
     }
     throw logic_error("Unexpected error. <find_key_in_map()>");
 }

@@ -18,3 +18,10 @@ add_executable(KLDIVERGENCE klDivergence.cpp TransactionsTable.h TransactionsTab
 target_link_libraries( KLDIVERGENCE ${CMAKE_THREAD_LIBS_INIT}  ${Boost_LIBRARIES}  ${PYTHON_LIBRARIES})
 
 
+message(STATUS "Build type: " ${CMAKE_BUILD_TYPE})
+message(STATUS "Library Type: " ${LIB_TYPE})
+message(STATUS "Compiler flags:" ${CMAKE_CXX_COMPILE_FLAGS})
+message(STATUS "Compiler cxx debug flags:" ${CMAKE_CXX_FLAGS_DEBUG})
+message(STATUS "Compiler cxx release flags:" ${CMAKE_CXX_FLAGS_RELEASE})
+message(STATUS "Compiler cxx min size flags:" ${CMAKE_CXX_FLAGS_MINSIZEREL})
+message(STATUS "Compiler cxx flags:" ${CMAKE_CXX_FLAGS})
