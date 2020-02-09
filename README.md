@@ -4,7 +4,8 @@ C++ implementation of the paper _On the Anonymization of Sparse High-Dimensional
 
 **Usage**
 
-Download release binary from https://github.com/Strafo/CAHD/releases.
+Download release binary from https://github.com/Strafo/CAHD/releases. (ELF 64-bit LSB executable, x86-64)
+
 ```
 $./Cahd --help
   Allowed options:
@@ -20,11 +21,19 @@ $./Cahd --help
 ```
 
 **Example**
+
 With the binary located in the parent folder of the CAD project:
+
 .
-├── Cahd (bianry file)
-├── CAHD (prj root)
+
+├── Cahd (bianary file)
+
+L__ BMS1formatted100.csv
+
+The command:
 
 ```
+$ ./Cahd -i BMS1formatted1000.csv -p 4 -a 3 -s 10877-18423  -v -d
 
 ```
+will print to the console some debug
